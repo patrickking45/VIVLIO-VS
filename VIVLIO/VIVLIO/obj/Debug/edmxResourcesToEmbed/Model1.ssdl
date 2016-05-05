@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FSPCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="MATIERE">
+    <Key>
+      <PropertyRef Name="MATIEREID" />
+    </Key>
+    <Property Name="MATIEREID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SUBJECTMATTER" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MESSAGE">
+    <Key>
+      <PropertyRef Name="MESSAGEID" />
+    </Key>
+    <Property Name="MESSAGEID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SENDERID" Type="int" Nullable="false" />
+    <Property Name="RECEIVERID" Type="int" Nullable="false" />
+    <Property Name="MESSAGETEXT" Type="nvarchar(max)" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="6" />
+  </EntityType>
+  <EntityType Name="NIVEAU">
+    <Key>
+      <PropertyRef Name="NIVEAUID" />
+    </Key>
+    <Property Name="NIVEAUID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NIVEAUNAME" Type="nvarchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OFFER">
+    <Key>
+      <PropertyRef Name="OFFERID" />
+    </Key>
+    <Property Name="OFFERID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MATIEREID" Type="int" Nullable="false" />
+    <Property Name="NIVEAUID" Type="int" Nullable="false" />
+    <Property Name="USERID" Type="int" Nullable="false" />
+    <Property Name="PRICE" Type="smallmoney" Nullable="false" />
+    <Property Name="CREATIONDATE" Type="date" Nullable="false" />
+    <Property Name="POSTEDDATE" Type="date" />
+    <Property Name="STATUS" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="PHOTO" Type="image" />
+    <Property Name="AUTHOR_COMPANYNAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CONDITION" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="CollègeName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Rating_Client" Type="int" />
+    <Property Name="Rating_Vendeur" Type="int" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
+    <Property Name="Photo" Type="image" />
+    <Property Name="Type" Type="nvarchar" MaxLength="25" />
+  </EntityType>
+  <Association Name="FK__MESSAGE__RECEIVE__4CA06362">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="MESSAGE" Type="Self.MESSAGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MESSAGE">
+        <PropertyRef Name="RECEIVERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MESSAGE__SENDERI__4BAC3F29">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="MESSAGE" Type="Self.MESSAGE" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="MESSAGE">
+        <PropertyRef Name="SENDERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OFFER__MATIEREID__4E88ABD4">
+    <End Role="MATIERE" Type="Self.MATIERE" Multiplicity="1" />
+    <End Role="OFFER" Type="Self.OFFER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MATIERE">
+        <PropertyRef Name="MATIEREID" />
+      </Principal>
+      <Dependent Role="OFFER">
+        <PropertyRef Name="MATIEREID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OFFER__NIVEAUID__4F7CD00D">
+    <End Role="NIVEAU" Type="Self.NIVEAU" Multiplicity="1" />
+    <End Role="OFFER" Type="Self.OFFER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NIVEAU">
+        <PropertyRef Name="NIVEAUID" />
+      </Principal>
+      <Dependent Role="OFFER">
+        <PropertyRef Name="NIVEAUID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OFFER__USERID__4D94879B">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OFFER" Type="Self.OFFER" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="UserID" />
+      </Principal>
+      <Dependent Role="OFFER">
+        <PropertyRef Name="USERID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FSPCModelStoreContainer">
+    <EntitySet Name="MATIERE" EntityType="Self.MATIERE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MESSAGE" EntityType="Self.MESSAGE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NIVEAU" EntityType="Self.NIVEAU" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OFFER" EntityType="Self.OFFER" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__MESSAGE__RECEIVE__4CA06362" Association="Self.FK__MESSAGE__RECEIVE__4CA06362">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MESSAGE" EntitySet="MESSAGE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MESSAGE__SENDERI__4BAC3F29" Association="Self.FK__MESSAGE__SENDERI__4BAC3F29">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="MESSAGE" EntitySet="MESSAGE" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OFFER__MATIEREID__4E88ABD4" Association="Self.FK__OFFER__MATIEREID__4E88ABD4">
+      <End Role="MATIERE" EntitySet="MATIERE" />
+      <End Role="OFFER" EntitySet="OFFER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OFFER__NIVEAUID__4F7CD00D" Association="Self.FK__OFFER__NIVEAUID__4F7CD00D">
+      <End Role="NIVEAU" EntitySet="NIVEAU" />
+      <End Role="OFFER" EntitySet="OFFER" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OFFER__USERID__4D94879B" Association="Self.FK__OFFER__USERID__4D94879B">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OFFER" EntitySet="OFFER" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
