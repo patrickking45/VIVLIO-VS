@@ -171,6 +171,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ConnexionRelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MATIEREsController.cs" />
@@ -346,6 +347,8 @@
     <Content Include="Views\OFFERs\Details.cshtml" />
     <Content Include="Views\OFFERs\Edit.cshtml" />
     <Content Include="Views\OFFERs\Index.cshtml" />
+    <Content Include="Views\ConnexionRel\SignIn.cshtml" />
+    <Content Include="Views\ConnexionRel\SignUp.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
