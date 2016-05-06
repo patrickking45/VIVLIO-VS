@@ -8,6 +8,14 @@
 
 <div>
     <h4>MATIERE</h4>
+    <p>
+       @if (Model.MATIEREID != 1)
+       {
+        @Html.ActionLink("Précédent", "Details", new { id = Model.MATIEREID - 1 }) 
+        
+       }
+       @Html.ActionLink("Suivant", "Details", new { id = Model.MATIEREID + 1 })
+    </p>
     <hr />
     <dl class="dl-horizontal">
         <dt>
