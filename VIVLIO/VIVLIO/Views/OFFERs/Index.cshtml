@@ -89,9 +89,8 @@
             @Html.DisplayFor(modelItem => item.Users.Login)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OFFERID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OFFERID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OFFERID })
+            @Html.ActionLink("Contact", "Contact","Users", new { id = item.USERID },null)
+            @Html.ActionLink("Details", "Details", new { id=item.OFFERID })
         </td>
     </tr>
 }

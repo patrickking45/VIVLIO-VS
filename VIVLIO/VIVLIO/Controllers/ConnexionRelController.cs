@@ -122,7 +122,13 @@ namespace VIVLIO.Controllers
                 }
             }
             return RedirectToAction("SignIn", "ConnexionRel");
+        }
 
+        public ActionResult SignOut()
+        {
+            Session.Abandon();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

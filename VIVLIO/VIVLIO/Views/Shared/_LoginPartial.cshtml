@@ -15,8 +15,26 @@
 }
 else
 {
+    if (Session["signedIn"] != null)
+    {
+        if (Session["signedIn"].Equals("false"))
+        {
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink("S’inscrire", "SignUp", "ConnexionRel")</li>
+            <li>@Html.ActionLink("Se Connecter", "SignIn", "ConnexionRel")</li>
+        </ul>
+        }
+        else {
+            <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Se Déconnecter", "SignOut", "ConnexionRel")</li>
+            </ul>
+         }
+    }
+    else {
     <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("S’inscrire", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Se connecter", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li>@Html.ActionLink("S’inscrire", "SignUp", "ConnexionRel")</li>
+        <li>|</li>
+        <li>@Html.ActionLink("Se Connecter", "SignIn", "ConnexionRel")</li>
     </ul>
+    }
 }
