@@ -12,14 +12,90 @@ namespace VIVLIO.Controllers
 {
     public class OFFERsController : Controller
     {
+        static int _MAX = 5;
         private FSPCEntities db = new FSPCEntities();
 
         // GET: OFFERs
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
-            return View(oFFER.ToList());
+
+            if (page == null)
+            {
+                //var offers4page = ListOffersByPage(oFFER.ToList(), 1);
+            }
+            else
+            {
+                //var offers4page = ListOffersByPage(oFFER.ToList(), page);
+            }
+
+
+
+            ViewBag.Num = oFFER.Count() / _MAX;
+
+            //return View(offers4page);
+            return View(oFFER);
         }
+
+        private System.Collections.Generic.List<VIVLIO.OFFER> ListOffersByPage(System.Collections.Generic.List<VIVLIO.OFFER> allOffers, int page)
+        {
+            System.Collections.Generic.List<VIVLIO.OFFER> allOffersFinal = new System.Collections.Generic.List<VIVLIO.OFFER>();
+
+
+            for (var j = ((page - 1) * _MAX + 1); j <= (page * _MAX); j++)
+            {
+                if (allOffers.Count >= j)
+                {
+                    allOffersFinal[(j - 1) / _MAX + 1] = allOffers[j];
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+
+            return allOffersFinal;
+        }
+
+
+        //  [HttpPost]
+        //  public ActionResult Index(SortingPagingInfo info)
+        //  {
+        //         IQueryable<OFFER> query = null;
+        //          switch (info.SortField)
+        //          {
+        //             case "CustomerID":
+        // query = (info.SortDirection == "ascending" ?
+        // db.OFFER.OrderBy(c => c.OFFERID) :
+        // db.OFFER.OrderByDescending(c => c.OFFERID));
+        //                break;
+        //            case "CompanyName":
+        //query = (info.SortDirection == "ascending" ?
+        //db.OFFER.OrderBy(c => c.POSTEDDATE) :
+        // db.OFFER.OrderByDescending(c => c.POSTEDDATE));
+        //                break;
+        //           case "ContactName":
+        // query = (info.SortDirection == "ascending" ?
+        // db.OFFER.OrderBy(c => c.NIVEAUID) :
+        //db.OFFER.OrderByDescending(c => c.NIVEAUID));
+        //               break;
+        //           case "Country":
+        //query = (info.SortDirection == "ascending" ?
+        //db.OFFER.OrderBy(c => c.PRICE) :
+        //db.OFFER.OrderByDescending(c => c.PRICE));
+        //                break;
+        //}
+        //query = query.Skip(info.CurrentPageIndex
+        //             * info.PageSize).Take(info.PageSize);
+        // ViewBag.SortingPagingInfo = info;
+        //List<OFFER> model = query.ToList();
+        //        return View(model);
+
+        //}
+
+
+
 
         // GET: OFFERs/Details/5
         public ActionResult Details(int? id)

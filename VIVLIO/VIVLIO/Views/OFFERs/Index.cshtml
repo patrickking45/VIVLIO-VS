@@ -1,4 +1,4 @@
-﻿@model IEnumerable<VIVLIO.OFFER>
+﻿@model  IEnumerable<VIVLIO.OFFER>
 
 @{
     ViewBag.Title = "Index";
@@ -50,49 +50,63 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PRICE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CREATIONDATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.POSTEDDATE)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PHOTO)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CONDITION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.DESCRIPTION)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.Login)
-        </td>
-        <td>
-            @Html.ActionLink("Contact", "Contact","Users", new { id = item.USERID },null)
-            @Html.ActionLink("Details", "Details", new { id=item.OFFERID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PRICE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CREATIONDATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.POSTEDDATE)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.STATUS)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PHOTO)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CONDITION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DESCRIPTION)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Users.Login)
+            </td>
+            <td>
+                @Html.ActionLink("Contact", "Contact", "Users", new { id = item.USERID }, null)
+                @Html.ActionLink("Details", "Details", new { id = item.OFFERID })
+            </td>
+        </tr>
+    }
 
 </table>
+<div>
+    @{
+        @Html.ActionLink("Retour", "Index", new { id = "back" }, null)
+        <a></a>
+        for (var i = 1; i <= ViewBag.Num; i++)
+        {
+            @Html.ActionLink(i.ToString(), "Index", new { id = i }, null)
+            <a></a>
+        }
+        @Html.ActionLink("Suivant", "Index", new { id = "next" }, null)
+        <a></a>
+    }
+</div>
