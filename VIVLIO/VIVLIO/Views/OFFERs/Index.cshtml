@@ -97,6 +97,12 @@
     }
 
 </table>
+@using (Html.BeginForm(FormMethod.Post))
+            {
+    <span class="right">@Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
+    <span class="right">@Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
+}
+
 <div>
     @{
         @Html.ActionLink("Retour", "Index", new { id = "back" }, null)

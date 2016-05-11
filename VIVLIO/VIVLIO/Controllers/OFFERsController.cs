@@ -16,6 +16,7 @@ namespace VIVLIO.Controllers
         private FSPCEntities db = new FSPCEntities();
 
         // GET: OFFERs
+        [HttpGet]
         public ActionResult Index(int? page)
         {
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
@@ -33,13 +34,59 @@ namespace VIVLIO.Controllers
 
             ViewBag.Num = oFFER.Count() / _MAX;
 
+            //Get All Matieres
+            var matieres = from m in db.MATIERE select m.SUBJECTMATTER;
+            ViewBag.ListofMatiere = matieres.ToList();
+
+            //Get All Niveaux
+            var niveaux = from n in db.NIVEAU select n.NIVEAUNAME;
+            ViewBag.ListofNiveau = niveaux.ToList();
+
             //return View(offers4page);
+            return View(oFFER);
+        }
+
+        [HttpPost, ActionName("Index")]
+        public ActionResult IndexPost(int? page, string Matiere, string Niveau) {
+
+            var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
+
+            if (Matiere != "")
+            {
+                if (Niveau != "")
+                {
+                    oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau);
+                }
+                else
+                {
+                    oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere);
+                }
+            }
+            else {
+                if (Niveau != "")
+                {
+                    oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == Niveau);
+                }
+                else
+                {
+                    oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
+                }
+            }
+
+            //Get All Matieres
+            var matieres = from m in db.MATIERE select m.SUBJECTMATTER;
+            ViewBag.ListofMatiere = matieres.ToList();
+
+            //Get All Niveaux
+            var niveaux = from n in db.NIVEAU select n.NIVEAUNAME;
+            ViewBag.ListofNiveau = niveaux.ToList();
+
             return View(oFFER);
         }
 
         private System.Collections.Generic.List<VIVLIO.OFFER> ListOffersByPage(System.Collections.Generic.List<VIVLIO.OFFER> allOffers, int page)
         {
-            System.Collections.Generic.List<VIVLIO.OFFER> allOffersFinal = new System.Collections.Generic.List<VIVLIO.OFFER>();
+            System.Collections.Generic.List<OFFER> allOffersFinal = new System.Collections.Generic.List<OFFER>();
 
 
             for (var j = ((page - 1) * _MAX + 1); j <= (page * _MAX); j++)
