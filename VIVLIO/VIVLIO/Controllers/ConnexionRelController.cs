@@ -77,6 +77,7 @@ namespace VIVLIO.Controllers
                                     Response.Cookies.Add(uCookie);
                                 }
                                 Session["userName"] = p.Prenom; //Nom du user connecté
+                                Session["userID"] = p.UserID;
                                 Session["signedIn"] = "true"; //Confirmation de status de connection
                                                               /*A modifier*/
                                 return RedirectToAction("Index", "Home");

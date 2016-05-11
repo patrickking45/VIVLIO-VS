@@ -175,6 +175,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MATIEREsController.cs" />
+    <Compile Include="Controllers\MESSAGEsController.cs" />
     <Compile Include="Controllers\OFFERsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -356,6 +357,11 @@
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
     <Content Include="Views\Users\Contact.cshtml" />
+    <Content Include="Views\MESSAGEs\Create.cshtml" />
+    <Content Include="Views\MESSAGEs\Delete.cshtml" />
+    <Content Include="Views\MESSAGEs\Details.cshtml" />
+    <Content Include="Views\MESSAGEs\Edit.cshtml" />
+    <Content Include="Views\MESSAGEs\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

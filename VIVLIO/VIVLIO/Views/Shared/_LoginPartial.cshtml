@@ -26,6 +26,8 @@ else
         }
         else {
             <ul class="nav navbar-nav navbar-right">
+                <li>@Html.ActionLink("Edit Profile", "Edit", "Users", new { id = (int)Session["userID"]},null)</li>
+                <li>@Html.ActionLink("Messages", "Index", "MESSAGEs")</li>
                 <li>@Html.ActionLink("Se Déconnecter", "SignOut", "ConnexionRel")</li>
             </ul>
          }
@@ -33,7 +35,6 @@ else
     else {
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("S’inscrire", "SignUp", "ConnexionRel")</li>
-        <li>|</li>
         <li>@Html.ActionLink("Se Connecter", "SignIn", "ConnexionRel")</li>
     </ul>
     }
