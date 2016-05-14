@@ -105,14 +105,14 @@
 
 <div>
     @{
-        @Html.ActionLink("Retour", "Index", new { id = "back" }, null)
+        //@Html.ActionLink("Retour", "Index", new { page = i-1 }, null)
         <a></a>
-        for (var i = 1; i <= ViewBag.Num; i++)
+        for (var i = 1; i <= ViewBag.Num+1; i++)
         {
-            @Html.ActionLink(i.ToString(), "Index", new { id = i }, null)
+            @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
             <a></a>
         }
-        @Html.ActionLink("Suivant", "Index", new { id = "next" }, null)
+        //@Html.ActionLink("Suivant", "Index", new { page = i+1 }, null)
         <a></a>
     }
 </div>

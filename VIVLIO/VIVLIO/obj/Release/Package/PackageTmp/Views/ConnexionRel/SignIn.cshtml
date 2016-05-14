@@ -1,0 +1,60 @@
+﻿
+
+@{
+    ViewBag.Title = "SignIn";
+}
+
+<h2>Se connecter</h2><br />
+
+@using (Html.BeginForm("SignIn", "ConnexionRel"))
+{
+    <table>
+        <tr>
+            <td>
+                @if (ViewBag.check == "yes")
+                {
+                    <input id="login" name="login" type="text" placeholder="Identifiant" value=@ViewBag.id required />
+                }
+                else
+                {
+                    <input id="login" name="login" type="text" placeholder="Identifiant" required />
+                }
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="password" name="password" type="password" placeholder="Mot de passe" required />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Se souvenir de moi
+                @if (ViewBag.check == "yes")
+                {
+                    <input id="remember" name="remember" type="checkbox" value="yes" checked />
+                }
+                else
+                {
+                    <input id="remember" name="remember" type="checkbox" value="yes" />
+                }
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                <label style="color:red">@ViewBag.comment</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="Submit1" type="submit" value="Continuer" />
+            </td>
+        </tr>
+    </table>
+
+}
+<div>
+    @Html.ActionLink("Retour", "Index", "Home", routeValues: null, htmlAttributes: new { id = "goBackLink" }) <!--A modifier-->
+</div>

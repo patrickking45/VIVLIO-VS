@@ -12,10 +12,10 @@
 
     @if (Model.OFFERID != 1)
     {
-        @Html.ActionLink("Précédent", "Details", new { id = Model.OFFERID - 1 })
+        @Html.ActionLink("Précédent", "GetLastRow", new { id = Model.OFFERID })
     }
 
-    @Html.ActionLink("Suivant", "Details", new { id = Model.OFFERID + 1 })
+    @Html.ActionLink("Suivant", "GetNextRow", new { id = Model.OFFERID })
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.PRICE)

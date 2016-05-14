@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <sitemanifest>
-  <IisApp path="C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" />
-  <setAcl path="C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
-  <setAcl path="C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
+  <IisApp path="D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" />
+  <setAcl path="D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" setAclResourceType="Directory" />
+  <setAcl path="D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Release\Package\PackageTmp" setAclUser="anonymousAuthenticationUser" setAclResourceType="Directory" />
 </sitemanifest>

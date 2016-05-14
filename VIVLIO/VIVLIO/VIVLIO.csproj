@@ -274,7 +274,9 @@
     <Content Include="FSPC.edmx.diagram">
       <DependentUpon>FSPC.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Model1.Context.tt">
