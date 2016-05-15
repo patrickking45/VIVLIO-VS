@@ -10,41 +10,15 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MESSAGETEXT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.STATUS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users1.Login)
-        </th>
-        <th></th>
-    </tr>
-
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.MESSAGETEXT)
+            <p class="messageContent">@Html.DisplayFor(modelItem => item.MESSAGETEXT)<br /></p>
+            <p class="senderName">De: @Html.ActionLink(item.Users.Prenom + " " +item.Users.Name, "Details", "Users", new { id = item.Users.UserID }, null)</p>        
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users1.Login)
-        </td>
-        <td>
-            @Html.ActionLink("DetailsUser", "Details","Users", new { id = item.Users.UserID },null)
-            @Html.ActionLink("Details", "Details", new { id=item.MESSAGEID })
+            @Html.ActionLink("Details", "Details", new { id = item.MESSAGEID })
         </td>
     </tr>
 }
-
 </table>

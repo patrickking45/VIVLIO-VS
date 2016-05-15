@@ -73,13 +73,15 @@ namespace VIVLIO.Controllers
         }
 
         // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit()
         {
-            if (id == null)
+            int UserID = (int)Session["userID"];
+
+            if (UserID.Equals(null))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Users users = db.Users.Find(id);
+            Users users = db.Users.Find(UserID);
             if (users == null)
             {
                 return HttpNotFound();

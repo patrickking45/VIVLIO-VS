@@ -22,3 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
+
+/**MESSAGERIE**/
+.senderName {
+    font-size:11px;
+    color:#aaa;
+}
