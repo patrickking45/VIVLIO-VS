@@ -16,6 +16,7 @@
     <Property Name="RECEIVERID" Type="int" Nullable="false" />
     <Property Name="MESSAGETEXT" Type="nvarchar(max)" />
     <Property Name="STATUS" Type="nvarchar" MaxLength="6" />
+    <Property Name="Subject" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NIVEAU">
     <Key>
@@ -41,6 +42,7 @@
     <Property Name="CONDITION" Type="nvarchar" MaxLength="25" Nullable="false" />
     <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
     <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PICTURE" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="Users">
     <Key>
@@ -58,6 +60,7 @@
     <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
     <Property Name="Photo" Type="image" />
     <Property Name="Type" Type="nvarchar" MaxLength="25" />
+    <Property Name="PICTURE" Type="nvarchar(max)" />
   </EntityType>
   <Association Name="FK__MESSAGE__RECEIVE__4CA06362">
     <End Role="Users" Type="Self.Users" Multiplicity="1" />

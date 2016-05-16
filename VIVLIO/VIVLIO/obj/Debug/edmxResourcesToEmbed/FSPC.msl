@@ -12,6 +12,7 @@
     <EntitySetMapping Name="MESSAGE">
       <EntityTypeMapping TypeName="FSPCModel.MESSAGE">
         <MappingFragment StoreEntitySet="MESSAGE">
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
           <ScalarProperty Name="MESSAGEID" ColumnName="MESSAGEID" />
           <ScalarProperty Name="SENDERID" ColumnName="SENDERID" />
           <ScalarProperty Name="RECEIVERID" ColumnName="RECEIVERID" />
@@ -31,6 +32,7 @@
     <EntitySetMapping Name="OFFER">
       <EntityTypeMapping TypeName="FSPCModel.OFFER">
         <MappingFragment StoreEntitySet="OFFER">
+          <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
           <ScalarProperty Name="OFFERID" ColumnName="OFFERID" />
           <ScalarProperty Name="MATIEREID" ColumnName="MATIEREID" />
           <ScalarProperty Name="NIVEAUID" ColumnName="NIVEAUID" />
@@ -50,6 +52,7 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="FSPCModel.Users">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
           <ScalarProperty Name="UserID" ColumnName="UserID" />
           <ScalarProperty Name="Login" ColumnName="Login" />
           <ScalarProperty Name="Password" ColumnName="Password" />

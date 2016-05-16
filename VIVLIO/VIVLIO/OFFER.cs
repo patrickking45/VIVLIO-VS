@@ -27,6 +27,7 @@ namespace VIVLIO
         public string CONDITION { get; set; }
         public string DESCRIPTION { get; set; }
         public string NAME { get; set; }
+        public string PICTURE { get; set; }
     
         public virtual MATIERE MATIERE { get; set; }
         public virtual NIVEAU NIVEAU { get; set; }

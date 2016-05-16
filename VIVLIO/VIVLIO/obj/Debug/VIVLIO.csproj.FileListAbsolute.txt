@@ -198,7 +198,6 @@ C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Ow
 C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Security.Google.resources.dll
 C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Security.Twitter.resources.dll
 C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.csprojResolveAssemblyReference.cache
 C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.dll
 C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.pdb
 D:\Me\Documents\VIVLIO\FSPC-APP\VIVLIO\VIVLIO\bin\roslyn\csc.exe.config

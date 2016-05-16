@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="FSPCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="FSPCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="MATIERE">
           <Key>
             <PropertyRef Name="MATIEREID" />
@@ -21,6 +21,7 @@
           <Property Name="RECEIVERID" Type="int" Nullable="false" />
           <Property Name="MESSAGETEXT" Type="nvarchar(max)" />
           <Property Name="STATUS" Type="nvarchar" MaxLength="6" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="NIVEAU">
           <Key>
@@ -46,6 +47,7 @@
           <Property Name="CONDITION" Type="nvarchar" MaxLength="25" Nullable="false" />
           <Property Name="DESCRIPTION" Type="nvarchar(max)" Nullable="false" />
           <Property Name="NAME" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PICTURE" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -63,6 +65,7 @@
           <Property Name="Prenom" Type="nvarchar" MaxLength="50" />
           <Property Name="Photo" Type="image" />
           <Property Name="Type" Type="nvarchar" MaxLength="25" />
+          <Property Name="PICTURE" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK__MESSAGE__RECEIVE__4CA06362">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -151,8 +154,7 @@
             <End Role="OFFER" EntitySet="OFFER" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="FSPCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -175,6 +177,7 @@
           <Property Name="STATUS" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Users" Relationship="Self.FK__MESSAGE__RECEIVE__4CA06362" FromRole="MESSAGE" ToRole="Users" />
           <NavigationProperty Name="Users1" Relationship="Self.FK__MESSAGE__SENDERI__4BAC3F29" FromRole="MESSAGE" ToRole="Users" />
+          <Property Name="Subject" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="NIVEAU">
           <Key>
@@ -204,6 +207,7 @@
           <NavigationProperty Name="MATIERE" Relationship="Self.FK__OFFER__MATIEREID__4E88ABD4" FromRole="OFFER" ToRole="MATIERE" />
           <NavigationProperty Name="NIVEAU" Relationship="Self.FK__OFFER__NIVEAUID__4F7CD00D" FromRole="OFFER" ToRole="NIVEAU" />
           <NavigationProperty Name="Users" Relationship="Self.FK__OFFER__USERID__4D94879B" FromRole="OFFER" ToRole="Users" />
+          <Property Name="PICTURE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -224,6 +228,7 @@
           <NavigationProperty Name="MESSAGE" Relationship="Self.FK__MESSAGE__RECEIVE__4CA06362" FromRole="Users" ToRole="MESSAGE" />
           <NavigationProperty Name="MESSAGE1" Relationship="Self.FK__MESSAGE__SENDERI__4BAC3F29" FromRole="Users" ToRole="MESSAGE" />
           <NavigationProperty Name="OFFER" Relationship="Self.FK__OFFER__USERID__4D94879B" FromRole="Users" ToRole="OFFER" />
+          <Property Name="PICTURE" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK__OFFER__MATIEREID__4E88ABD4">
           <End Role="MATIERE" Type="Self.MATIERE" Multiplicity="1" />
@@ -329,6 +334,7 @@
           <EntitySetMapping Name="MESSAGE">
             <EntityTypeMapping TypeName="FSPCModel.MESSAGE">
               <MappingFragment StoreEntitySet="MESSAGE">
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
                 <ScalarProperty Name="MESSAGEID" ColumnName="MESSAGEID" />
                 <ScalarProperty Name="SENDERID" ColumnName="SENDERID" />
                 <ScalarProperty Name="RECEIVERID" ColumnName="RECEIVERID" />
@@ -348,6 +354,7 @@
           <EntitySetMapping Name="OFFER">
             <EntityTypeMapping TypeName="FSPCModel.OFFER">
               <MappingFragment StoreEntitySet="OFFER">
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
                 <ScalarProperty Name="OFFERID" ColumnName="OFFERID" />
                 <ScalarProperty Name="MATIEREID" ColumnName="MATIEREID" />
                 <ScalarProperty Name="NIVEAUID" ColumnName="NIVEAUID" />
@@ -367,6 +374,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="FSPCModel.Users">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="PICTURE" ColumnName="PICTURE" />
                 <ScalarProperty Name="UserID" ColumnName="UserID" />
                 <ScalarProperty Name="Login" ColumnName="Login" />
                 <ScalarProperty Name="Password" ColumnName="Password" />

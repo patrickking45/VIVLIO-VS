@@ -13,7 +13,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            <p class="messageContent">@Html.DisplayFor(modelItem => item.MESSAGETEXT)<br /></p>
+            <p class="messageContent">@Html.DisplayFor(modelItem => item.Subject)<br /></p>
             <p class="senderName">De: @Html.ActionLink(item.Users.Prenom + " " +item.Users.Name, "Details", "Users", new { id = item.Users.UserID }, null)</p>        
         </td>
         <td>

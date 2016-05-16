@@ -19,6 +19,7 @@ namespace VIVLIO
         public int RECEIVERID { get; set; }
         public string MESSAGETEXT { get; set; }
         public string STATUS { get; set; }
+        public string Subject { get; set; }
     
         public virtual Users Users { get; set; }
         public virtual Users Users1 { get; set; }
