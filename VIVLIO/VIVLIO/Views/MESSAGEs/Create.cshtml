@@ -15,8 +15,6 @@
     ViewBag.Title = "Create";
 }
 
-
-
 <h2>Composer un Message</h2>
 
 
@@ -24,7 +22,7 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal composeMessage">
         <hr />
 
         <div class="form-group">
@@ -48,7 +46,7 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="submit col-md-10">
                 <input type="submit" value="Envoyer" class="btn btn-default" />
             </div>
         </div>

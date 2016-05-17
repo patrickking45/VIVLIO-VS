@@ -41,6 +41,25 @@ textarea {
     background-color:#F7FFDD;
 }
 
+.ui-autocomplete {
+    background-color:white;
+    border:1px solid grey;
+    width:50%;
+}
+
+.ui-helper-hidden-accessible {
+    display:none;
+}
+
+.composeMessage input, .composeMessage textarea {
+    max-width:1250px;
+    width:100%;
+}
+
+.submit {
+    width:20%;
+}
+
 .messagerieWrapper {
     width:100%;
     display:table;
