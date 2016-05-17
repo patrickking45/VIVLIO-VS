@@ -80,6 +80,19 @@ namespace VIVLIO.Controllers
                                 Session["userID"] = p.UserID;
                                 Session["signedIn"] = "true"; //Confirmation de status de connection
                                                               /*A modifier*/
+                                if (p.Type == "Mod")
+                                {
+                                    return RedirectToAction("Index", "OFFERsMOD");
+                                }
+                                if (p.Type == "Admin")
+                                {
+                                    return RedirectToAction("Index", "Admin");
+                                }
+                                if (p.Type != "Block")
+                                {
+                                    return RedirectToAction("Index", "Home");
+                                }
+
                                 return RedirectToAction("Index", "Home");
                             }
                             else

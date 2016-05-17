@@ -60,10 +60,13 @@ namespace VIVLIO.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "UserID,Login,Password,Email,PhoneNumber,CollègeName,Rating_Client,Rating_Vendeur,Name,Prenom,Photo,Type")] Users users)
+        public ActionResult Create([Bind(Include = "UserID,Login,Password,Email,PhoneNumber,CollègeName,Rating_Client,Rating_Vendeur,Name,Prenom,Photo")] Users users)
         {
             if (ModelState.IsValid)
             {
+                Users usetemp = db.Users.Find(users.UserID);
+                users.Type = usetemp.Type;
+
                 db.Users.Add(users);
                 db.SaveChanges();
                 return RedirectToAction("Index");

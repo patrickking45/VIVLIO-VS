@@ -52,6 +52,8 @@
 
     @foreach (var item in Model)
     {
+        if (item.STATUS == "Selling")
+        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PRICE)
@@ -94,6 +96,7 @@
                 @Html.ActionLink("Details", "Details", new { id = item.OFFERID })
             </td>
         </tr>
+        }
     }
 
 </table>

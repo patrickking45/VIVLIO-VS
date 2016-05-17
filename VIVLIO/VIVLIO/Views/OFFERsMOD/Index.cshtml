@@ -1,0 +1,99 @@
+﻿@model IEnumerable<VIVLIO.OFFER>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Offer Review</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PRICE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CREATIONDATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.POSTEDDATE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.STATUS)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PHOTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AUTHOR_COMPANYNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CONDITION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DESCRIPTION)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MATIERE.SUBJECTMATTER)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NIVEAU.NIVEAUNAME)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Users.Login)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    if (item.STATUS == "Waiting")
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PRICE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CREATIONDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.POSTEDDATE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.STATUS)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PHOTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CONDITION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DESCRIPTION)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Users.Login)
+        </td>
+        <td>
+            @Html.ActionLink("Accept Offer", "AcceptOffer", new { id = item.OFFERID }) |
+            @Html.ActionLink("Refuse Offer", "RefuseOffer",new { id = item.OFFERID } )
+        </td>
+    </tr>
+    }
+}
+
+</table>

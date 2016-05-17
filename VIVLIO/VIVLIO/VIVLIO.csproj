@@ -171,12 +171,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ConnexionRelController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MATIEREsController.cs" />
     <Compile Include="Controllers\MESSAGEsController.cs" />
     <Compile Include="Controllers\OFFERsController.cs" />
+    <Compile Include="Controllers\OFFERsMODController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="FSPC.Context.cs">
       <AutoGen>True</AutoGen>
@@ -364,6 +366,12 @@
     <Content Include="Views\MESSAGEs\Details.cshtml" />
     <Content Include="Views\MESSAGEs\Edit.cshtml" />
     <Content Include="Views\MESSAGEs\Index.cshtml" />
+    <Content Include="Views\OFFERsMOD\Create.cshtml" />
+    <Content Include="Views\OFFERsMOD\Delete.cshtml" />
+    <Content Include="Views\OFFERsMOD\Details.cshtml" />
+    <Content Include="Views\OFFERsMOD\Edit.cshtml" />
+    <Content Include="Views\OFFERsMOD\Index.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
