@@ -8,7 +8,7 @@ namespace VIVLIO.Controllers
 {
     public class ConnexionRelController : Controller
     {
-        private FSPCEntities DI = new FSPCEntities();
+        private FSPCEntities db = new FSPCEntities();
         // GET: ConnexionRel
         public ActionResult Index()
         {
@@ -54,7 +54,7 @@ namespace VIVLIO.Controllers
                 if (login != "" && password != "")
                 {
                     //Cherche dans les Users prédéfinis
-                    foreach (var p in DI.Users)
+                    foreach (var p in db.Users)
                     {
                         if (p != null)
                         {
@@ -106,7 +106,7 @@ namespace VIVLIO.Controllers
             {
                 if (login != "" && password != "" && prenom != "" && nom != "" && email != "" && confirm != "")
                 {
-                    using (DI)
+                    using (db)
                     {
                         Users u = new Users();
                         u.Login = login;
@@ -117,8 +117,8 @@ namespace VIVLIO.Controllers
                         u.CollègeName = school;
                         //u.Photo = photo;
                         u.Password = password;
-                        DI.Users.Add(u);
-                        DI.SaveChanges();
+                        db.Users.Add(u);
+                        db.SaveChanges();
                     }
                 }
             }

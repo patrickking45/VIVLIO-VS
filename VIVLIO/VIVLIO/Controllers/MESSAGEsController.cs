@@ -15,10 +15,19 @@ namespace VIVLIO.Controllers
         private FSPCEntities db = new FSPCEntities();
 
         // GET: MESSAGEs
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(String inbox)
         {
             int userID = (int)Session["userID"];
             var mESSAGE = db.MESSAGE.Include(m => m.Users).Include(m => m.Users1).Where(m => m.Users.UserID == userID).OrderByDescending(m => m.MESSAGEID);
+            if (inbox == "Send")
+            {
+                mESSAGE = db.MESSAGE.Include(m => m.Users).Include(m => m.Users1).Where(m => m.Users1.UserID == userID).OrderByDescending(m => m.MESSAGEID);
+            }
+            else {
+                mESSAGE = db.MESSAGE.Include(m => m.Users).Include(m => m.Users1).Where(m => m.Users.UserID == userID).OrderByDescending(m => m.MESSAGEID);
+            }
+
             return View(mESSAGE.ToList());
         }
 
@@ -32,16 +41,27 @@ namespace VIVLIO.Controllers
             MESSAGE mESSAGE = db.MESSAGE.Find(id);
             if (mESSAGE == null)
             {
-                return HttpNotFound();
+                return RedirectToAction("Index");
             }
 
-            if (mESSAGE.STATUS == "UNSEEN") {
-                mESSAGE.STATUS = "SEEN";
-                db.Entry(mESSAGE).State = EntityState.Modified;
-                db.SaveChanges();
+            if ((int)Session["UserID"] == mESSAGE.RECEIVERID)
+            {
+                if (mESSAGE.STATUS == "UNSEEN")
+                {
+                    mESSAGE.STATUS = "SEEN";
+                    db.Entry(mESSAGE).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return View(mESSAGE);
+            }
+            else {
+                if ((int)Session["UserID"] == mESSAGE.SENDERID) {
+                    return View(mESSAGE);
+                }
+                return RedirectToAction("Index");
             }
 
-            return View(mESSAGE);
+            
         }
 
         // GET: MESSAGEs/Create
@@ -56,11 +76,14 @@ namespace VIVLIO.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MESSAGEID,RECEIVERID,Subject,MESSAGETEXT")] MESSAGE mESSAGE)
+        public ActionResult Create([Bind(Include = "MESSAGEID,Subject,MESSAGETEXT")] MESSAGE mESSAGE, string RECEIVERID)
         {
             if (ModelState.IsValid)
             {
+                var receiver = db.Users.Where(u => u.Login == RECEIVERID).FirstOrDefault();
+
                 mESSAGE.SENDERID = (int)Session["userID"];
+                mESSAGE.RECEIVERID = receiver.UserID;
                 mESSAGE.STATUS = "UNSEEN";
                 db.MESSAGE.Add(mESSAGE);
                 db.SaveChanges();
@@ -130,6 +153,15 @@ namespace VIVLIO.Controllers
             db.MESSAGE.Remove(mESSAGE);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult userAutoComplete()
+        {
+            string term = Request.QueryString["term"].ToLower();
+            var result = from u in db.Users
+                         where u.Login.ToLower().Contains(term)
+                         select u.Login;
+            return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         protected override void Dispose(bool disposing)
