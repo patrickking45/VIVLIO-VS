@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 
 namespace VIVLIO.Controllers
@@ -19,7 +20,6 @@ namespace VIVLIO.Controllers
         {
             HttpCookie uCookie = Request.Cookies.Get("userName");
             Session["signedIn"] = "false";
-
 
             //Affichage en fonction du cookie
             if (uCookie != null)
@@ -59,7 +59,7 @@ namespace VIVLIO.Controllers
                         if (p != null)
                         {
                             //User trouvé
-                            if (login.Equals(p.Login) && password.Equals(p.Password))
+                            if (login.Equals(p.Login) && Crypto.VerifyHashedPassword(p.Password, password))
                             {
                                 //Se souvenir de l'identifiant
                                 if (remember == "yes")
@@ -80,19 +80,6 @@ namespace VIVLIO.Controllers
                                 Session["userID"] = p.UserID;
                                 Session["signedIn"] = "true"; //Confirmation de status de connection
                                                               /*A modifier*/
-                                if (p.Type == "Mod")
-                                {
-                                    return RedirectToAction("Index", "OFFERsMOD");
-                                }
-                                if (p.Type == "Admin")
-                                {
-                                    return RedirectToAction("Index", "Admin");
-                                }
-                                if (p.Type != "Block")
-                                {
-                                    return RedirectToAction("Index", "Home");
-                                }
-
                                 return RedirectToAction("Index", "Home");
                             }
                             else
@@ -129,7 +116,7 @@ namespace VIVLIO.Controllers
                         u.PhoneNumber = phonenumber;
                         u.CollègeName = school;
                         //u.Photo = photo;
-                        u.Password = password;
+                        u.Password = (string)Crypto.HashPassword(password);
                         db.Users.Add(u);
                         db.SaveChanges();
                     }
