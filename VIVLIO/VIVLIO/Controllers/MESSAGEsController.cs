@@ -18,7 +18,7 @@ namespace VIVLIO.Controllers
         public ActionResult Index()
         {
             int userID = (int)Session["userID"];
-            var mESSAGE = db.MESSAGE.Include(m => m.Users).Include(m => m.Users1).Where(m => m.Users1.UserID == userID);
+            var mESSAGE = db.MESSAGE.Include(m => m.Users).Include(m => m.Users1).Where(m => m.Users.UserID == userID).OrderByDescending(m => m.MESSAGEID);
             return View(mESSAGE.ToList());
         }
 
@@ -34,6 +34,13 @@ namespace VIVLIO.Controllers
             {
                 return HttpNotFound();
             }
+
+            if (mESSAGE.STATUS == "UNSEEN") {
+                mESSAGE.STATUS = "SEEN";
+                db.Entry(mESSAGE).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+
             return View(mESSAGE);
         }
 
@@ -41,7 +48,6 @@ namespace VIVLIO.Controllers
         public ActionResult Create()
         {
             ViewBag.RECEIVERID = new SelectList(db.Users, "UserID", "Login");
-            ViewBag.SENDERID = new SelectList(db.Users, "UserID", "Login");
             return View();
         }
 
@@ -50,17 +56,18 @@ namespace VIVLIO.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "MESSAGEID,SENDERID,RECEIVERID,MESSAGETEXT,STATUS")] MESSAGE mESSAGE)
+        public ActionResult Create([Bind(Include = "MESSAGEID,RECEIVERID,Subject,MESSAGETEXT")] MESSAGE mESSAGE)
         {
             if (ModelState.IsValid)
             {
+                mESSAGE.SENDERID = (int)Session["userID"];
+                mESSAGE.STATUS = "UNSEEN";
                 db.MESSAGE.Add(mESSAGE);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.RECEIVERID = new SelectList(db.Users, "UserID", "Login", mESSAGE.RECEIVERID);
-            ViewBag.SENDERID = new SelectList(db.Users, "UserID", "Login", mESSAGE.SENDERID);
             return View(mESSAGE);
         }
 

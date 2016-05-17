@@ -10,15 +10,19 @@
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            <p class="messageContent">@Html.DisplayFor(modelItem => item.Subject)<br /></p>
-            <p class="senderName">De: @Html.ActionLink(item.Users.Prenom + " " +item.Users.Name, "Details", "Users", new { id = item.Users.UserID }, null)</p>        
-        </td>
-        <td>
-            @Html.ActionLink("Details", "Details", new { id = item.MESSAGEID })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+            <tr class="@item.STATUS">
+                <td>
+                    @if (item.Subject != null)
+                    {
+                        <p class="messageSubject">@Html.ActionLink(item.Subject, "Details", new { id = item.MESSAGEID })<br /></p>
+                    }
+                    else {
+                        <p class="messageSubject noSubject">@Html.ActionLink("(Message sans objet)", "Details", new { id = item.MESSAGEID })<br /></p>
+                    }
+                    <p class="senderName">De: @Html.ActionLink(item.Users1.Prenom + " " + item.Users1.Name, "Details", "Users", new { id = item.Users1.UserID }, null)</p>
+                </td>
+            </tr>
+    }
 </table>

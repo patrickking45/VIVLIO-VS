@@ -11,12 +11,14 @@ namespace VIVLIO
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
     public partial class MESSAGE
     {
         public int MESSAGEID { get; set; }
         public int SENDERID { get; set; }
         public int RECEIVERID { get; set; }
+
+        [DataType(DataType.MultilineText)]
         public string MESSAGETEXT { get; set; }
         public string STATUS { get; set; }
         public string Subject { get; set; }

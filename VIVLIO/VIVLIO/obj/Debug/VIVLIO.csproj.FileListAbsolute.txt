@@ -404,3 +404,4 @@ D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Security
 D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Debug\VIVLIO.csprojResolveAssemblyReference.cache
 D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Debug\VIVLIO.dll
 D:\ASP Projet Repo GitHub\Livrable2\VIVLIO\VIVLIO\obj\Debug\VIVLIO.pdb
+C:\Users\Patrick\Documents\ProjetASP\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.csprojResolveAssemblyReference.cache
