@@ -137,6 +137,34 @@ textarea {
     width:20%;
 }
 
+/**OFFERS**/
+
+.offersWrapper {
+    padding-top:90px;
+    width:100%;
+}
+
+.displayImage img {
+    width:100px;
+}
+
+.offers .title {
+    margin:0;
+    padding:0;
+}
+
+.offers tr:hover {
+    cursor: pointer;
+}
+
+.offers .price {
+    background-color:dodgerblue;
+    width:10%;
+    vertical-align:middle;
+    text-align:center;
+    font-size:25px;
+}
+
 /**MESSAGERIE**/
 .title {
     padding-bottom:25px;

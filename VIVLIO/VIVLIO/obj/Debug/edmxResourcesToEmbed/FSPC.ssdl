@@ -50,7 +50,7 @@
     </Key>
     <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Login" Type="nvarchar" MaxLength="25" Nullable="false" />
-    <Property Name="Password" Type="nvarchar" MaxLength="25" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="PhoneNumber" Type="nvarchar" MaxLength="25" Nullable="false" />
     <Property Name="CollègeName" Type="nvarchar" MaxLength="50" />
