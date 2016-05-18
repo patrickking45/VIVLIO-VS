@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -12,6 +13,7 @@ namespace VIVLIO.Controllers
 {
     public class OFFERsController : Controller
     {
+       
         static int _MAX = 5;
         private FSPCEntities db = new FSPCEntities();
 
@@ -338,6 +340,10 @@ namespace VIVLIO.Controllers
             ViewBag.MATIEREID = new SelectList(db.MATIERE, "MATIEREID", "SUBJECTMATTER");
             ViewBag.NIVEAUID = new SelectList(db.NIVEAU, "NIVEAUID", "NIVEAUNAME");
             ViewBag.USERID = new SelectList(db.Users, "UserID", "Login");
+
+
+
+
             return View();
         }
 
@@ -348,9 +354,13 @@ namespace VIVLIO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OFFERID,MATIEREID,NIVEAUID,PRICE,AUTHOR_COMPANYNAME,CONDITION,DESCRIPTION,NAME")] OFFER oFFER)
         {
+          
 
             if (ModelState.IsValid)
             {
+
+
+                
                 oFFER.USERID = (int)Session["userID"];
                 oFFER.STATUS = "Waiting";
                 DateTime thisday = DateTime.Today;
@@ -367,6 +377,8 @@ namespace VIVLIO.Controllers
             return View(oFFER);
 
         }
+       
+
 
         // GET: OFFERs/Edit/5
         public ActionResult Edit(int? id)
