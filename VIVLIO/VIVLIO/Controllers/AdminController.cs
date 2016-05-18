@@ -14,6 +14,13 @@ namespace VIVLIO.Controllers
         // GET: Admin
         public ActionResult Index()
         {
+            Users u = DI.Users.Find((int)Session["userID"]);
+            string typp = u.Type;
+            if(typp != "Admin")
+            {
+                return RedirectToAction("Index","Home");
+            }
+            
             return View(DI.Users.ToList());
         }
         public ActionResult SetClientToMod(int? id)

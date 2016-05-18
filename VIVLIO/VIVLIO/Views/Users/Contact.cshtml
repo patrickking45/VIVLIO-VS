@@ -11,22 +11,6 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Login)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Login)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Password)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Password)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Email)
         </dt>
 
@@ -83,11 +67,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Photo)
+            @Html.DisplayNameFor(model => model.PICTURE)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Photo)
+            @Html.DisplayFor(model => model.PICTURE)
         </dd>
 
         <dt>
@@ -102,4 +86,5 @@
 </div>
 <p>
     @Html.ActionLink("Details", "Details", new { id = Model.UserID })
+    @Html.ActionLink("Back to list","Index","OFFERs")
 </p>

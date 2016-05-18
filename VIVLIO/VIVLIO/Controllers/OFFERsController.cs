@@ -354,28 +354,35 @@ namespace VIVLIO.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "OFFERID,MATIEREID,NIVEAUID,PRICE,AUTHOR_COMPANYNAME,CONDITION,DESCRIPTION,NAME")] OFFER oFFER)
         {
-          
-
-            if (ModelState.IsValid)
+            if ((Session["userID"]) != null)
             {
 
 
-                
-                oFFER.USERID = (int)Session["userID"];
-                oFFER.STATUS = "Waiting";
-                DateTime thisday = DateTime.Today;
-                oFFER.CREATIONDATE = thisday;
-                oFFER.POSTEDDATE = null;
-                db.OFFER.Add(oFFER);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+
+
+
+                    oFFER.USERID = (int)Session["userID"];
+                    oFFER.STATUS = "Waiting";
+                    DateTime thisday = DateTime.Today;
+                    oFFER.CREATIONDATE = thisday;
+                    oFFER.POSTEDDATE = null;
+                    db.OFFER.Add(oFFER);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+
+                ViewBag.MATIEREID = new SelectList(db.MATIERE, "MATIEREID", "SUBJECTMATTER", oFFER.MATIEREID);
+                ViewBag.NIVEAUID = new SelectList(db.NIVEAU, "NIVEAUID", "NIVEAUNAME", oFFER.NIVEAUID);
+
+               
             }
-
-            ViewBag.MATIEREID = new SelectList(db.MATIERE, "MATIEREID", "SUBJECTMATTER", oFFER.MATIEREID);
-            ViewBag.NIVEAUID = new SelectList(db.NIVEAU, "NIVEAUID", "NIVEAUNAME", oFFER.NIVEAUID);
-
+            else
+            {
+                return RedirectToAction("SignIn", "ConnexionRel");
+            }
             return View(oFFER);
-
         }
        
 

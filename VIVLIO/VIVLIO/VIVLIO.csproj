@@ -262,7 +262,7 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="favicon.ico" />
+    <Content Include="Content\Images\Logo\favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="FSPC.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -293,9 +293,15 @@
     </Content>
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %284%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %285%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %286%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.2.3.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
