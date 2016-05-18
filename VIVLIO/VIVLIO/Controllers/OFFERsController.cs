@@ -27,7 +27,7 @@ namespace VIVLIO.Controllers
             var niveaux = from n in db.NIVEAU select n.NIVEAUNAME;
             ViewBag.ListofNiveau = niveaux.ToList();
 
-            var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
+            var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling");
             ViewBag.Num = oFFER.Count() / _MAX;
 
             if (ViewBag.matiere != null || ViewBag.niveau != null)
@@ -41,12 +41,12 @@ namespace VIVLIO.Controllers
                         {
                             String niveau = ViewBag.niveau;
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
                         }
                         else
                         {
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Take(_MAX);
                         }
                     }
                     else {
@@ -54,12 +54,12 @@ namespace VIVLIO.Controllers
                         {
                             String niveau = ViewBag.niveau;
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
                         }
                         else
                         {
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Take(_MAX);
                         }
                     }
                 }
@@ -71,12 +71,12 @@ namespace VIVLIO.Controllers
                         {
                             String niveau = ViewBag.niveau;
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                         }
                         else
                         {
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                         }
                     }
                     else {
@@ -84,12 +84,12 @@ namespace VIVLIO.Controllers
                         {
                             String niveau = ViewBag.niveau;
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                         }
                         else
                         {
                             ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                         }
                     }
                 }
@@ -110,12 +110,12 @@ namespace VIVLIO.Controllers
             if (page == null)
             {
                 ViewBag.lastPage = page;
-                return View(oFFER.OrderBy(o => o.OFFERID).Take(_MAX));
+                return View(oFFER.Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Take(_MAX));
             }
             else
             {
                 ViewBag.lastPage = page;
-                return View(oFFER.OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX));
+                return View(oFFER.Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX));
 
             }
 
