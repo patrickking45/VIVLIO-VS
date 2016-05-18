@@ -346,10 +346,16 @@ namespace VIVLIO.Controllers
         // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OFFERID,MATIEREID,NIVEAUID,USERID,PRICE,CREATIONDATE,POSTEDDATE,STATUS,PHOTO,AUTHOR_COMPANYNAME,CONDITION,DESCRIPTION,NAME")] OFFER oFFER)
+        public ActionResult Create([Bind(Include = "OFFERID,MATIEREID,NIVEAUID,PRICE,AUTHOR_COMPANYNAME,CONDITION,DESCRIPTION,NAME")] OFFER oFFER)
         {
+
             if (ModelState.IsValid)
             {
+                oFFER.USERID = (int)Session["userID"];
+                oFFER.STATUS = "Waiting";
+                DateTime thisday = DateTime.Today;
+                oFFER.CREATIONDATE = thisday;
+                oFFER.POSTEDDATE = null;
                 db.OFFER.Add(oFFER);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -357,8 +363,9 @@ namespace VIVLIO.Controllers
 
             ViewBag.MATIEREID = new SelectList(db.MATIERE, "MATIEREID", "SUBJECTMATTER", oFFER.MATIEREID);
             ViewBag.NIVEAUID = new SelectList(db.NIVEAU, "NIVEAUID", "NIVEAUNAME", oFFER.NIVEAUID);
-            ViewBag.USERID = new SelectList(db.Users, "UserID", "Login", oFFER.USERID);
+
             return View(oFFER);
+
         }
 
         // GET: OFFERs/Edit/5

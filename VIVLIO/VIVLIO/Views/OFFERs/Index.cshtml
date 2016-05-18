@@ -13,6 +13,9 @@
     <table class="table offers">
         @foreach (var item in Model)
         {
+            if (item.STATUS == "Selling")
+            {
+
             <tr onclick="location.href = '@(Url.Action("Details", "Offers", new { id = item.OFFERID }))'">
                 <td class="displayImage">
                     @if (item.PICTURE != null)
@@ -47,6 +50,7 @@
                     @Html.DisplayFor(modelItem => item.PRICE) $
                 </td>
             </tr>
+            }
         }
 
     </table>

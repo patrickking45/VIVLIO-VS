@@ -4,47 +4,39 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2 class="title"></h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.MESSAGETEXT)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.STATUS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Login)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users1.Login)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.MESSAGETEXT)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.STATUS)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users.Login)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Users1.Login)
-        </td>
-        <td>
-            @Html.ActionLink("DetailsUser", "Details","Users", new { id = item.Users.UserID },null)
-            @Html.ActionLink("Details", "Details", new { id=item.MESSAGEID })
-        </td>
-    </tr>
-}
-
-</table>
+<div class="messagerieWrapper">
+    <div class="messagerieMenu">
+        <table>
+            <tr><td>@Html.ActionLink("Composer", "Create")</td></tr>
+            <tr><td>@Html.ActionLink("Reçu", "Index")</td></tr>
+            <tr><td>@Html.ActionLink("Envoyé", "Index", new { inbox = "Send" })</td></tr>
+        </table>
+    </div>
+    <div class="messagerieInbox">
+        <table class="table">
+            @foreach (var item in Model)
+            {
+                <tr class="@item.STATUS">
+                    <td>
+                        @if (item.Subject != null)
+                        {
+                            <p class="messageSubject">@Html.ActionLink(item.Subject, "Details", new { id = item.MESSAGEID })<br /></p>
+                        }
+                        else {
+                            <p class="messageSubject noSubject">@Html.ActionLink("(Message sans objet)", "Details", new { id = item.MESSAGEID })<br /></p>
+                        }
+                        @if (item.RECEIVERID == (int)Session["UserID"])
+                        {
+                            <p class="senderName">De: @Html.ActionLink(item.Users1.Prenom + " " + item.Users1.Name, "Details", "Users", new { id = item.Users1.UserID }, null)</p>
+                        }
+                        else {
+                            <p class="senderName">Envoyé à: @Html.ActionLink(item.Users.Prenom + " " + item.Users.Name, "Details", "Users", new { id = item.Users1.UserID }, null)</p>
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</div>
