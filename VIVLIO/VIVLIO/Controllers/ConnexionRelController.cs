@@ -76,6 +76,7 @@ namespace VIVLIO.Controllers
                                     uCookie.Expires = DateTime.Now.AddDays(-1);
                                     Response.Cookies.Add(uCookie);
                                 }
+                                Session["type"] = p.Type;//type du user connecté
                                 Session["userName"] = p.Prenom; //Nom du user connecté
                                 Session["userID"] = p.UserID;
                                 Session["signedIn"] = "true"; //Confirmation de status de connection

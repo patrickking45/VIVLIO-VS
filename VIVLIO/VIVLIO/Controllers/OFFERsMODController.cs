@@ -17,6 +17,13 @@ namespace VIVLIO.Controllers
         // GET: OFFERsMOD
         public ActionResult Index()
         {
+            Users u = db.Users.Find((int)Session["userID"]);
+            string typp = u.Type;
+            if (typp != "Mod")
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
             return View(oFFER.ToList());
         }

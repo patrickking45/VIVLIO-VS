@@ -32,11 +32,20 @@ namespace VIVLIO.Controllers
             {
                 return HttpNotFound();
             }
+            if ((Session["userID"]) != null)
+            {
+
+            }
+            else
+            {
+                return RedirectToAction("SignIn", "ConnexionRel");
+            }
             return View(users);
         }
 
         public ActionResult Contact(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -46,6 +55,16 @@ namespace VIVLIO.Controllers
             {
                 return HttpNotFound();
             }
+            if ((Session["userID"]) != null)
+            {
+
+            }
+            else
+            {
+                 return RedirectToAction("SignIn", "ConnexionRel");
+            }
+                
+           
             return View(users);
         }
 
