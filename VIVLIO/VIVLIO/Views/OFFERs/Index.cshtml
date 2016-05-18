@@ -7,22 +7,31 @@
 }
 
 <div class="offersWrapper">
-    @using (Html.BeginForm(FormMethod.Post))
-    {
+   
         <div class="top">
             <div class="left">
                 <p class="create">
                     @Html.ActionLink("Publier une offre", "Create")
                 </p>
             </div>
-            <div class="middle">
-                <p></p>
-            </div>
+                      
+               <div class="middle">
+                    <!--<p></p>-->
+                @using (Html.BeginForm(FormMethod.Post))
+                {
+                        <input id="searchStr" placeholder="Rechercher..." name="searchStr" type="text" />
+                        <input id="Submit1" type="submit" value="submit" />
+                }                          
+                </div>
+            
+        @using (Html.BeginForm(FormMethod.Post))
+        {
             <div class="right">
                 Matière: @Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")
                 Niveau: @Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")
                 <button class="search" type="submit">Filtrer</button>
             </div>
+        }
         </div>
         <table class="table offers">
                 @foreach (var item in Model)
@@ -54,7 +63,7 @@
                     </tr>
                 }
             </table>
-    }
+    
 
                 <div class="pagination">
                     @{

@@ -225,6 +225,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\Logo\LogoVivlio.png" />
+    <Content Include="Content\Images\Logo\see.png" />
     <Content Include="Content\Images\OffersImage\noImage.png" />
     <Content Include="Content\Images\Slides\Harry-Potter-Birthday-07302015.jpg" />
     <Content Include="Content\Images\Slides\stockvault-alone184780.jpg" />
