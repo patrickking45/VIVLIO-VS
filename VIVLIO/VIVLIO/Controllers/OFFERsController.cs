@@ -30,19 +30,108 @@ namespace VIVLIO.Controllers
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
             ViewBag.Num = oFFER.Count() / _MAX;
 
+            if (ViewBag.matiere != null || ViewBag.niveau != null)
+            {
+                if (page == null)
+                {
+                    if (ViewBag.matiere != "")
+                    {
+                        String matiere = ViewBag.matiere;
+                        if (ViewBag.niveau != "")
+                        {
+                            String niveau = ViewBag.niveau;
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                    }
+                    else {
+                        if (ViewBag.niveau != "")
+                        {
+                            String niveau = ViewBag.niveau;
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                    }
+                }
+                else {
+                    if (ViewBag.matiere != "")
+                    {
+                        String matiere = ViewBag.matiere;
+                        if (ViewBag.niveau != "")
+                        {
+                            String niveau = ViewBag.niveau;
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                    }
+                    else {
+                        if (ViewBag.niveau != "")
+                        {
+                            String niveau = ViewBag.niveau;
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                    }
+                }
+
+                ViewBag.Num = oFFER.Count() / _MAX;
+
+                //Get All Matieres
+                var matiereS = from m in db.MATIERE select m.SUBJECTMATTER;
+                ViewBag.ListofMatiere = matiereS.ToList();
+
+                //Get All Niveaux
+                var niveauX = from n in db.NIVEAU select n.NIVEAUNAME;
+                ViewBag.ListofNiveau = niveauX.ToList();
+
+                return View(oFFER);
+            }
+
             if (page == null)
             {
+                ViewBag.lastPage = page;
                 return View(oFFER.OrderBy(o => o.OFFERID).Take(_MAX));
             }
             else
             {
-                return View(oFFER.OrderBy(o => o.OFFERID).Skip(((int)page-1)*_MAX).Take(_MAX));
+                ViewBag.lastPage = page;
+                return View(oFFER.OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX));
+
             }
+
         }
 
         [HttpPost, ActionName("Index")]
         public ActionResult IndexPost(int? page, string Matiere, string Niveau)
         {
+            if (Matiere == null)
+            {
+                Matiere = ViewBag.matiere;
+            }
+            if (Niveau == null)
+            {
+                Niveau = ViewBag.niveau;
+            }
 
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users);
 
@@ -52,20 +141,24 @@ namespace VIVLIO.Controllers
                 {
                     if (Niveau != "")
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
                     }
                     else
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Take(_MAX);
                     }
                 }
                 else {
                     if (Niveau != "")
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
                     }
                     else
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Take(_MAX);
                     }
                 }
@@ -75,26 +168,32 @@ namespace VIVLIO.Controllers
                 {
                     if (Niveau != "")
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                     }
                     else
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                     }
                 }
                 else {
                     if (Niveau != "")
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                     }
                     else
                     {
+                        ViewBag.lastPage = page;
                         oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
                     }
                 }
             }
 
             ViewBag.Num = oFFER.Count() / _MAX;
+            ViewBag.matiere = Matiere;
+            ViewBag.niveau = Niveau;
 
             //Get All Matieres
             var matieres = from m in db.MATIERE select m.SUBJECTMATTER;

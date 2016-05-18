@@ -52,8 +52,6 @@
 
     @foreach (var item in Model)
     {
-        if (item.STATUS == "Selling")
-        {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.PRICE)
@@ -96,26 +94,39 @@
                 @Html.ActionLink("Details", "Details", new { id = item.OFFERID })
             </td>
         </tr>
-        }
     }
 
 </table>
 @using (Html.BeginForm(FormMethod.Post))
-            {
+{
     <span class="right">@Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
     <span class="right">@Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
 }
 
 <div>
     @{
-        //@Html.ActionLink("Retour", "Index", new { page = i-1 }, null)
+        if (ViewBag.lastPage == null)
+        {
+            @Html.ActionLink("Retour", "Index", new { page = 1 }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Retour", "Index", new { page = ViewBag.lastPage - 1 }, null)
+        }
         <a></a>
-        for (var i = 1; i <= ViewBag.Num+1; i++)
+        for (var i = 1; i <= ViewBag.Num + 1; i++)
         {
             @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
             <a></a>
         }
-        //@Html.ActionLink("Suivant", "Index", new { page = i+1 }, null)
+        if (ViewBag.lastPage == null)
+        {
+            @Html.ActionLink("Suivant", "Index", new { page = 2 }, null)
+        }
+        else
+        {
+            @Html.ActionLink("Suivant", "Index", new { page = ViewBag.lastPage + 1 }, null)
+        }
         <a></a>
     }
 </div>
