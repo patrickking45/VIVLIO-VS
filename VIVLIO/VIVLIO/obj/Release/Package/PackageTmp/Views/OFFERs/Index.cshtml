@@ -4,115 +4,87 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="offersWrapper">
+    <h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.PRICE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CREATIONDATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.POSTEDDATE)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.STATUS)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PHOTO)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AUTHOR_COMPANYNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CONDITION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MATIERE.SUBJECTMATTER)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NIVEAU.NIVEAUNAME)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Users.Login)
-        </th>
-        <th></th>
-    </tr>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table offers">
+        @foreach (var item in Model)
+        {
+            if (item.STATUS == "Selling")
+            {
 
-    @foreach (var item in Model)
+            <tr onclick="location.href = '@(Url.Action("Details", "Offers", new { id = item.OFFERID }))'">
+                <td class="displayImage">
+                    @if (item.PICTURE != null)
+                    {
+                        <img src="@Url.Content("~/Content/Images/OffersImage/" + item.PICTURE)" />
+                    }
+                    else {
+                        <img src="@Url.Content("~/Content/Images/OffersImage/" + "noImage.png")" />
+                    }
+                </td>
+                <td>
+                    <h3 class="title">@Html.DisplayFor(modelItem => item.NAME)</h3>
+                    <p>De:@Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)</p>
+                    <p>@Html.DisplayFor(modelItem => item.DESCRIPTION)</p>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CONDITION)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Users.Login)
+                </td>
+                <td>
+                    @Html.ActionLink("Contact", "Contact", "Users", new { id = item.USERID }, null)
+                </td>
+                <td class="price">
+                    @Html.DisplayFor(modelItem => item.PRICE) $
+                </td>
+            </tr>
+            }
+        }
+
+    </table>
+    @using (Html.BeginForm(FormMethod.Post))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.PRICE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CREATIONDATE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.POSTEDDATE)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.STATUS)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PHOTO)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CONDITION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DESCRIPTION)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Users.Login)
-            </td>
-            <td>
-                @Html.ActionLink("Contact", "Contact", "Users", new { id = item.USERID }, null)
-                @Html.ActionLink("Details", "Details", new { id = item.OFFERID })
-            </td>
-        </tr>
+        <span class="right">@Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
+        <span class="right">@Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
     }
 
-</table>
-@using (Html.BeginForm(FormMethod.Post))
+    <div>
+        @{
+            if (ViewBag.lastPage == null)
             {
-    <span class="right">@Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
-    <span class="right">@Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
-}
-
-<div>
-    @{
-        //@Html.ActionLink("Retour", "Index", new { page = i-1 }, null)
-        <a></a>
-        for (var i = 1; i <= ViewBag.Num+1; i++)
-        {
-            @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
+                @Html.ActionLink("Retour", "Index", new { page = 1 }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Retour", "Index", new { page = ViewBag.lastPage - 1 }, null)
+            }
+            <a></a>
+            for (var i = 1; i <= ViewBag.Num + 1; i++)
+            {
+                @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
+                <a></a>
+            }
+            if (ViewBag.lastPage == null)
+            {
+                @Html.ActionLink("Suivant", "Index", new { page = 2 }, null)
+            }
+            else
+            {
+                @Html.ActionLink("Suivant", "Index", new { page = ViewBag.lastPage + 1 }, null)
+            }
             <a></a>
         }
-        //@Html.ActionLink("Suivant", "Index", new { page = i+1 }, null)
-        <a></a>
-    }
+    </div>
 </div>

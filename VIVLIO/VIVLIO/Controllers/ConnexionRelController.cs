@@ -59,7 +59,7 @@ namespace VIVLIO.Controllers
                         if (p != null)
                         {
                             //User trouvé
-                            if (login.Equals(p.Login) && Crypto.VerifyHashedPassword(p.Password, password))
+                            if (login.Equals(p.Login) && password.Equals(p.Password))
                             {
                                 //Se souvenir de l'identifiant
                                 if (remember == "yes")
@@ -80,8 +80,21 @@ namespace VIVLIO.Controllers
                                 Session["userID"] = p.UserID;
                                 Session["signedIn"] = "true"; //Confirmation de status de connection
                                                               /*A modifier*/
-                                return RedirectToAction("Index", "Home");
+                                if (p.Type == "Mod")
+                                {
+                                    return RedirectToAction("Index", "OFFERsMOD");
+                                }
+                                if (p.Type == "Admin")
+                                {
+                                    return RedirectToAction("Index", "Admin");
+                                }
+                                if (p.Type != "Block")
+                                {
+                                    return RedirectToAction("Index", "Home");
+                                }
+                                
                             }
+
                             else
                             {
                                 ViewBag.Comment = "Identifiant ou mot de passe invalide";
