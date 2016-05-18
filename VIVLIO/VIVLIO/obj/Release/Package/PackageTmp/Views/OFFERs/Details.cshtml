@@ -6,116 +6,45 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>OFFER</h4>
-    <hr />
+<div class="offerDetailsWrapper">
 
-    @if (Model.OFFERID != 1)
-    {
-        @Html.ActionLink("Précédent", "GetLastRow", new { id = Model.OFFERID })
-    }
+    <div class="boxWrapper">
+        <div class="navigation">
+            <div class="back">
+                @if (Model.OFFERID != 1)
+                {
+                    @Html.ActionLink("<", "GetLastRow", new { id = Model.OFFERID })
+                }
+            </div>
+            <div class="next">
+                @Html.ActionLink(">", "GetNextRow", new { id = Model.OFFERID })
+            </div>
+        </div>
+        <div class="infoWrapper">
+            <div class="displayImage">
+                @if (Model.PICTURE != null)
+            {
+                    <img src="@Url.Content("~/Content/Images/OffersImage/" + Model.PICTURE)" />
+                }
+                else {
+                    <img src="@Url.Content("~/Content/Images/OffersImage/" + "noImage.png")" />
+                }
+            </div>
+            <div class="info">
+                <h2 class="title">@Html.DisplayFor(model => model.NAME)</h2>
+                <p class="author">De: @Html.DisplayFor(model => model.AUTHOR_COMPANYNAME)</p>
+                <p class="desc">@Html.DisplayFor(model => model.DESCRIPTION)</p>
+                <p class="condition">Condition: @Html.DisplayFor(model => model.CONDITION)</p>
+                <p class="matiere">Matière: @Html.DisplayFor(model => model.MATIERE.SUBJECTMATTER)</p>
+                <p class="niveau">Niveau: @Html.DisplayFor(model => model.NIVEAU.NIVEAUNAME)</p>
+                <p class="posted">Publié le: @Html.DisplayFor(model => model.POSTEDDATE)</p>
+                <p class="seleer">Vendu par: @Html.ActionLink(Model.Users.Prenom + " " + Model.Users.Name, "Contact", "Users", new { id = Model.USERID }, null)</p>
+                <p class="price">@Html.DisplayFor(model => model.PRICE) $</p>
+            </div>
+        </div>
+        <p class="backtolist">
+            @Html.ActionLink("Back to List", "Index")
 
-    @Html.ActionLink("Suivant", "GetNextRow", new { id = Model.OFFERID })
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.PRICE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PRICE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CREATIONDATE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CREATIONDATE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.POSTEDDATE)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.POSTEDDATE)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.STATUS)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.STATUS)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.PHOTO)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PHOTO)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AUTHOR_COMPANYNAME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AUTHOR_COMPANYNAME)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CONDITION)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CONDITION)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DESCRIPTION)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DESCRIPTION)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NAME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NAME)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.MATIERE.SUBJECTMATTER)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MATIERE.SUBJECTMATTER)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.NIVEAU.NIVEAUNAME)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NIVEAU.NIVEAUNAME)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Users.Login)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Users.Login)
-        </dd>
-
-    </dl>
+        </p>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-    
-</p>
+</div>
