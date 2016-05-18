@@ -4,92 +4,92 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Créer mon compte</h2>
-<h4>* champs obligatoires</h4>
-@using (Html.BeginForm("SignUp", "ConnexionRel"))
-{
-    <table>
-        <tr>
-            <td class="cat">
-                * Identifiant
-            </td>
-            <td>
-                <input id="login" name="login" type="text" required />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Prénom
-            </td>
-            <td>
-                <input id="prenom" name="prenom" type="text" required />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Nom
-            </td>
-            <td>
-                <input id="nom" name="nom" type="text" required />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Courriel
-            </td>
-            <td>
-                <input id="email" name="email" type="email" required />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                &nbsp;&nbsp;Téléphone
-            </td>
-            <td>
-                <input id="phonenumber" name="phonenumber" type="text" pattern="^[0-9]{10}|[0-9]{11}$" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                &nbsp;&nbsp;Établissement scolaire
-            </td>
-            <td>
-                <input id="school" name="school" type="text" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                &nbsp;&nbsp;Photo de profil
-            </td>
-            <td>
-                <input id="photo" name="photo" type="file" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Mot de passe
-            </td>
-            <td>
-                <input id="password" name="password" type="password" required />
-            </td>
-        </tr>
-        <tr>
-            <td>
-                * Confirmer
-            </td>
-            <td>
-                <input id="confirm" name="confirm" type="password" required />
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input id="Submit1" type="submit" value="submit" />
-            </td>
-        </tr>
-    </table>
-}
-
-<div>
-    @Html.ActionLink("Retour", "Index", "Home", routeValues: null, htmlAttributes: new { id = "goBackLink" }) <!--A modifier-->
+<div class="signupWrapper">
+    <div class="boxWrapper">
+        <h2>Créer mon compte</h2>
+        <h4>* champs obligatoires</h4>
+        @using (Html.BeginForm("SignUp", "ConnexionRel"))
+        {
+            <table>
+                <tr>
+                    <td class="cat">
+                        * Identifiant
+                    </td>
+                    <td>
+                        <input id="login" name="login" type="text" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        * Prénom
+                    </td>
+                    <td>
+                        <input id="prenom" name="prenom" type="text" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        * Nom
+                    </td>
+                    <td>
+                        <input id="nom" name="nom" type="text" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        * Courriel
+                    </td>
+                    <td>
+                        <input id="email" name="email" type="email" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;&nbsp;Téléphone
+                    </td>
+                    <td>
+                        <input id="phonenumber" name="phonenumber" type="text" pattern="^[0-9]{10}|[0-9]{11}$" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;&nbsp;Établissement scolaire
+                    </td>
+                    <td>
+                        <input id="school" name="school" type="text" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        &nbsp;&nbsp;Photo de profil
+                    </td>
+                    <td>
+                        <input id="photo" name="photo" type="file" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        * Mot de passe
+                    </td>
+                    <td>
+                        <input id="password" name="password" type="password" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        * Confirmer
+                    </td>
+                    <td>
+                        <input id="confirm" name="confirm" type="password" required />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input id="Submit1" type="submit" value="submit" />
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
 </div>
