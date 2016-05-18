@@ -26,10 +26,6 @@ textarea {
 }
 
 /**HEADER**/
-.navbar {
-    max-height:80px;
-    background-color:dodgerblue;
-}
 
 .logo {
     border-radius:50%;
@@ -40,6 +36,7 @@ textarea {
 }
 
 .nav li a{
+    color:#ddd !important;
     margin-top:15px;
     font-size:20px;
 }
@@ -70,6 +67,75 @@ textarea {
     z-index:10;
 }
 
+/**SignIn**/
+.signinWrapper {
+    padding-top:90px;
+    width:100%;
+}
+
+.signinWrapper .boxWrapper {
+    width:50%;
+    margin:auto;
+    padding:25px;
+    padding-top:15px;
+    border:2px solid dodgerblue;
+    border-radius:20px;
+    background-color:#eee;
+}
+
+.signinWrapper .boxWrapper h2 {
+    margin:0;
+}
+
+.signinWrapper .boxWrapper table {
+    width:100%;
+}
+
+.signinWrapper .boxWrapper input {
+    width:80%;
+    max-width:80%;
+    padding:5px;
+    margin-bottom:5px;
+}
+
+#Submit1,#remember {
+    width:20%;
+}
+
+/**SignUp**/
+.signupWrapper {
+    padding-top:90px;
+    width:100%;
+}
+
+.signupWrapper .boxWrapper {
+    width:50%;
+    margin:auto;
+    padding:25px;
+    padding-top:15px;
+    border:2px solid dodgerblue;
+    border-radius:20px;
+    background-color:#eee;
+}
+
+.signupWrapper .boxWrapper h2 {
+    margin:0;
+}
+
+.signupWrapper .boxWrapper table {
+    width:100%;
+}
+
+.signupWrapper .boxWrapper input {
+    width:80%;
+    max-width:80%;
+    padding:5px;
+    margin-bottom:5px;
+}
+
+#Submit1,#remember {
+    width:20%;
+}
 
 /**MESSAGERIE**/
 .title {
