@@ -1,86 +1,88 @@
 ﻿@model  IEnumerable<VIVLIO.OFFER>
 
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Offres";
 }
 
 <div class="offersWrapper">
-    <h2>Index</h2>
 
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <table class="table offers">
-        @foreach (var item in Model)
-        {
-            <tr onclick="location.href = '@(Url.Action("Details", "Offers", new { id = item.OFFERID }))'">
-                <td class="displayImage">
-                    @if (item.PICTURE != null)
-                    {
-                        <img src="@Url.Content("~/Content/Images/OffersImage/" + item.PICTURE)" />
-                    }
-                    else {
-                        <img src="@Url.Content("~/Content/Images/OffersImage/" + "noImage.png")" />
-                    }
-                </td>
-                <td>
-                    <h3 class="title">@Html.DisplayFor(modelItem => item.NAME)</h3>
-                    <p>De:@Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)</p>
-                    <p>@Html.DisplayFor(modelItem => item.DESCRIPTION)</p>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CONDITION)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Users.Login)
-                </td>
-                <td>
-                    @Html.ActionLink("Contact", "Contact", "Users", new { id = item.USERID }, null)
-                </td>
-                <td class="price">
-                    @Html.DisplayFor(modelItem => item.PRICE) $
-                </td>
-            </tr>
-        }
-
-    </table>
     @using (Html.BeginForm(FormMethod.Post))
     {
-        <span class="right">@Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
-        <span class="right">@Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")<button class="search" type="submit">GO<i class="fa fa-search"></i></button></span>
+        <div class="top">
+            <div class="left">
+                <p class="create">
+                    @Html.ActionLink("Publier une offre", "Create")
+                </p>
+            </div>
+            <div class="middle">
+                <p></p>
+            </div>
+            <div class="right">
+                Matière: @Html.DropDownList("Matiere", new SelectList(ViewBag.ListofMatiere), "Tout")
+                Niveau: @Html.DropDownList("Niveau", new SelectList(ViewBag.ListofNiveau), "Tout")
+                <button class="search" type="submit">Filtrer</button>
+            </div>
+        </div>
+        <table class="table offers">
+                @foreach (var item in Model)
+                {
+                    <tr onclick="location.href = '@(Url.Action("Details", "Offers", new { id = item.OFFERID }))'">
+                        <td class="displayImage">
+                            @if (item.PICTURE != null)
+                    {
+                                <img src="@Url.Content("~/Content/Images/OffersImage/" + item.PICTURE)" />
+                            }
+                            else {
+                                <img src="@Url.Content("~/Content/Images/OffersImage/" + "noImage.png")" />
+                            }
+                        </td>
+                        <td class="desc">
+                            <h3 class="title">@Html.DisplayFor(modelItem => item.NAME)</h3>
+                            <p class="author">De: @Html.DisplayFor(modelItem => item.AUTHOR_COMPANYNAME)</p>
+                            <p>@Html.DisplayFor(modelItem => item.DESCRIPTION)</p>
+                        </td>
+                        <td class="info">
+                            <p class="seller">Vendu par: @Html.ActionLink(item.Users.Prenom + " " + item.Users.Name, "Contact", "Users", new { id = item.USERID }, null)</p>
+                            <p class="condition">Condition: @Html.DisplayFor(modelItem => item.CONDITION)</p>
+                            <p class="matiere">Matière: @Html.DisplayFor(modelItem => item.MATIERE.SUBJECTMATTER)</p>
+                            <p class="niveau">Niveau: @Html.DisplayFor(modelItem => item.NIVEAU.NIVEAUNAME)</p>
+                        </td>
+                        <td class="price">
+                            @Html.DisplayFor(modelItem => item.PRICE) $
+                        </td>
+                    </tr>
+                }
+
+    </table>
     }
 
-    <div>
-        @{
-            if (ViewBag.lastPage == null)
-            {
-                @Html.ActionLink("Retour", "Index", new { page = 1 }, null)
-            }
-            else
-            {
-                @Html.ActionLink("Retour", "Index", new { page = ViewBag.lastPage - 1 }, null)
-            }
-            <a></a>
-            for (var i = 1; i <= ViewBag.Num + 1; i++)
-            {
-                @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
-                <a></a>
-            }
-            if (ViewBag.lastPage == null)
-            {
-                @Html.ActionLink("Suivant", "Index", new { page = 2 }, null)
-            }
-            else
-            {
-                @Html.ActionLink("Suivant", "Index", new { page = ViewBag.lastPage + 1 }, null)
-            }
-            <a></a>
-        }
-    </div>
-</div>
+                <div class="pagination">
+                    @{
+                        if (ViewBag.lastPage == null)
+                        {
+                            @Html.ActionLink("<", "Index", new { page = 1 }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink("<", "Index", new { page = ViewBag.lastPage - 1 }, null)
+                        }
+                        <a></a>
+                        for (var i = 1; i <= ViewBag.Num + 1; i++)
+                        {
+                            @Html.ActionLink(i.ToString(), "Index", new { page = i }, null)
+                            <a></a>
+                        }
+                        if (ViewBag.lastPage == null)
+                        {
+                            @Html.ActionLink(">", "Index", new { page = 2 }, null)
+                        }
+                        else
+                        {
+                            @Html.ActionLink(">", "Index", new { page = ViewBag.lastPage + 1 }, null)
+                        }
+                        <a></a>
+                    }
+                </div>
+            </div>
