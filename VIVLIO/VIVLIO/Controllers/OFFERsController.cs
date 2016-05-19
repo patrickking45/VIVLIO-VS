@@ -124,8 +124,10 @@ namespace VIVLIO.Controllers
         }
 
         [HttpPost, ActionName("Index")]
-        public ActionResult IndexPost(int? page, string Matiere, string Niveau)
+        public ActionResult IndexPost(int? page, string Matiere, string Niveau, string searchStr)
         {
+
+
             if (Matiere == null)
             {
                 Matiere = ViewBag.matiere;
@@ -136,62 +138,79 @@ namespace VIVLIO.Controllers
             }
 
             var oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling");
-
-            if (page == null)
+            if(searchStr == null)
             {
-                if (Matiere != "")
+                if (page == null)
                 {
-                    if (Niveau != "")
+                    if (Matiere != "")
                     {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        if (Niveau != "")
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
                     }
-                    else
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Take(_MAX);
+                    else {
+                        if (Niveau != "")
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Take(_MAX);
+                        }
                     }
                 }
                 else {
-                    if (Niveau != "")
+
+                    
+
+                    if (Matiere != "")
                     {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
+                        if (Niveau != "")
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
                     }
-                    else
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Take(_MAX);
+                    else {
+                        if (Niveau != "")
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
+                        else
+                        {
+                            ViewBag.lastPage = page;
+                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
+                        }
                     }
                 }
             }
-            else {
-                if (Matiere != "")
+            else
+            {
+                oFFER = from m in db.OFFER select m;
+
+                if (!String.IsNullOrEmpty(searchStr))
                 {
-                    if (Niveau != "")
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                    }
-                    else
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                    }
+                    oFFER = oFFER.Where(s => s.NAME.Contains(searchStr) || s.AUTHOR_COMPANYNAME.Contains(searchStr));
                 }
-                else {
-                    if (Niveau != "")
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                    }
-                    else
-                    {
-                        ViewBag.lastPage = page;
-                        oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                    }
-                }
+
+                
             }
+            
 
             ViewBag.Num = oFFER.Count() / _MAX;
             ViewBag.matiere = Matiere;
