@@ -608,3 +608,4 @@ C:\Users\antoine\Documents\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Securit
 C:\Users\antoine\Documents\VIVLIO-VS\VIVLIO\VIVLIO\bin\fr\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
 C:\Users\antoine\Documents\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.dll
 C:\Users\antoine\Documents\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.pdb
+C:\Users\antoine\Documents\VIVLIO-VS\VIVLIO\VIVLIO\obj\Debug\VIVLIO.csprojResolveAssemblyReference.cache
