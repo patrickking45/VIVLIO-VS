@@ -201,14 +201,7 @@ namespace VIVLIO.Controllers
             }
             else
             {
-                oFFER = from m in db.OFFER select m;
-
-                if (!String.IsNullOrEmpty(searchStr))
-                {
                     oFFER = oFFER.Where(s => s.NAME.Contains(searchStr) || s.AUTHOR_COMPANYNAME.Contains(searchStr));
-                }
-
-                
             }
             
 

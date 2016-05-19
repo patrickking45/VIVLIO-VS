@@ -306,6 +306,8 @@
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %2818%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %2819%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %2820%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - FTP %2821%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - FTP %285%29.pubxml" />
@@ -325,6 +327,8 @@
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %2818%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %2819%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %2820%29.pubxml" />
+    <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %2821%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %284%29.pubxml" />
     <None Include="Properties\PublishProfiles\VIVLIO - Web Deploy %285%29.pubxml" />
