@@ -170,12 +170,7 @@ namespace VIVLIO.Controllers
                 }
                 else {
 
-                    oFFER = from m in db.OFFER select m;
-
-                    if (!String.IsNullOrEmpty(searchStr))
-                    {
-                        oFFER = oFFER.Where(s => s.NAME.Contains(searchStr) || s.AUTHOR_COMPANYNAME.Contains(searchStr));
-                    }
+                    
 
                     if (Matiere != "")
                     {
@@ -206,61 +201,14 @@ namespace VIVLIO.Controllers
             }
             else
             {
-                if (page == null)
+                oFFER = from m in db.OFFER select m;
+
+                if (!String.IsNullOrEmpty(searchStr))
                 {
-                    if (Matiere != "")
-                    {
-                        if (Niveau != "")
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
-                        }
-                        else
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Take(_MAX);
-                        }
-                    }
-                    else {
-                        if (Niveau != "")
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Take(_MAX);
-                        }
-                        else
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Take(_MAX);
-                        }
-                    }
+                    oFFER = oFFER.Where(s => s.NAME.Contains(searchStr) || s.AUTHOR_COMPANYNAME.Contains(searchStr));
                 }
-                else {
-                    if (Matiere != "")
-                    {
-                        if (Niveau != "")
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                        }
-                        else
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.MATIERE.SUBJECTMATTER == Matiere).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                        }
-                    }
-                    else {
-                        if (Niveau != "")
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").Where(o => o.NIVEAU.NIVEAUNAME == Niveau).OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                        }
-                        else
-                        {
-                            ViewBag.lastPage = page;
-                            oFFER = db.OFFER.Include(o => o.MATIERE).Include(o => o.NIVEAU).Include(o => o.Users).Where(o => o.STATUS == "Selling").OrderBy(o => o.OFFERID).Skip(((int)page - 1) * _MAX).Take(_MAX);
-                        }
-                    }
-                }
+
+                
             }
             
 
